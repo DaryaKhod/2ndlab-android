@@ -1,7 +1,7 @@
 package com.example.myapplication2;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,20 +9,27 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.*;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class MyArrayList extends AppCompatActivity {
+import com.example.myapplication2.R;
+
+import java.util.ArrayList;
+
+public class MyArrayList extends AppCompatActivity implements View.OnClickListener{
 
     EditText edittext1;
-    Button Button;
+    TextView textView1;
+    Button Button, exite;
     ListView textList;
     ArrayList<String> myStringArray;
     ArrayAdapter<String> TextAdapter;
     String item;
     Integer indecxVal;
 
+    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +37,16 @@ public class MyArrayList extends AppCompatActivity {
 
         Button = findViewById(R.id.button1);
         edittext1 = findViewById(R.id.editTextTextPersonName);
+        textView1 = (TextView)findViewById(R.id.login1);
         textList = findViewById(R.id.textList);
         myStringArray = new ArrayList<String>();
         TextAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, myStringArray);
+
+        exite = findViewById(R.id.button);
+        exite.setOnClickListener(this);
+
+        String email = getIntent().getStringExtra("e");
+        textView1.setText(textView1.getText().toString() + " " + email);
 
         Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,8 +55,10 @@ public class MyArrayList extends AppCompatActivity {
                 myStringArray.add(e);
                 textList.setAdapter(TextAdapter);
                 TextAdapter.notifyDataSetChanged();
+                edittext1.setText("");
             }
-         });
+        });
+
         //delete
         textList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -56,6 +72,21 @@ public class MyArrayList extends AppCompatActivity {
                 return true;
             }
         });
+
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.button:
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+
+                break;
+            default:
+                break;
+        }
     }
 
 }

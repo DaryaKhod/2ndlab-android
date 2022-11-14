@@ -7,7 +7,7 @@
     tools:context=".MyArrayList">
 
     <RelativeLayout
-        android:id="@+id/activity_main"
+        android:id="@+id/array_list_activity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,12 +17,12 @@
             android:id="@+id/editTextTextPersonName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/login1"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="158dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="150dp"
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/word"
@@ -32,11 +32,12 @@
 
         <Button
             android:id="@+id/button1"
+            android:backgroundTint="@color/purple_500"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/editTextTextPersonName"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:text="@string/add" />
 
@@ -47,6 +48,23 @@
             android:layout_below="@+id/button1"
             android:layout_marginTop="20dp"
             />
+
+        <Button
+            android:id="@+id/button"
+            android:backgroundTint="@color/design_default_color_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTextTextPersonName"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:text="Выйти" />
+
+        <TextView
+            android:id="@+id/login1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="email:" />
 
     </RelativeLayout>
 
