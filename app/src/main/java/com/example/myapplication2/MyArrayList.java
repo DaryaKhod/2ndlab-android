@@ -4,13 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,8 +24,6 @@ public class MyArrayList extends AppCompatActivity implements View.OnClickListen
     ListView textList;
     ArrayList<String> myStringArray;
     ArrayAdapter<String> TextAdapter;
-    String item;
-    Integer indecxVal;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
@@ -59,22 +55,7 @@ public class MyArrayList extends AppCompatActivity implements View.OnClickListen
             }
         });
 
-        //delete
-        textList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                item = adapterView.getItemAtPosition(i).toString()+" удалено";
-                Toast.makeText(MyArrayList.this, item, Toast.LENGTH_LONG).show();
-                myStringArray.remove(i);
-                textList.setAdapter(TextAdapter);
-                TextAdapter.notifyDataSetChanged();
-
-                return true;
-            }
-        });
-
     }
-
 
     @Override
     public void onClick(View view) {
