@@ -43,7 +43,19 @@ public class MyArrayList extends AppCompatActivity {
                 TextAdapter.notifyDataSetChanged();
             }
          });
+        //delete
+        textList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                item = adapterView.getItemAtPosition(i).toString()+" удалено";
+                Toast.makeText(MyArrayList.this, item, Toast.LENGTH_LONG).show();
+                myStringArray.remove(i);
+                textList.setAdapter(TextAdapter);
+                TextAdapter.notifyDataSetChanged();
 
+                return true;
+            }
+        });
     }
 
 }
