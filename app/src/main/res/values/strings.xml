@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">MyApplication2</string>
     <string name="button">Button</string>
-    <string name="button1">Войти</string>
+    <string name="button_login">Войти</string>
+    <string name="button_save">Сохранить</string>
+    <string name="button_delete">Удалить</string>
     <string name="text1">Введите почту</string>
     <string name="text2">Введите пароль</string>
-    <string name="word">введите слово</string>
-    <string name="add">Добавить</string>
+    <string name="word">Введите новый пароль</string>
+    <string name="add">Изменить</string>
     <string name="delete">Удалить</string>
 </resources>
