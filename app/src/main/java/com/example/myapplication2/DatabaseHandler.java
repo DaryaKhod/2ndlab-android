@@ -86,7 +86,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void updateUser(String login, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         String sql = "UPDATE " + TABLE_NAME +
-                " SET " + DBContract.UserEntry.COLUMN_NAME_PASS + "  = '" + password +
+                " SET " + DBContract.UserEntry.COLUMN_NAME_PASS + "   = '" + password +
                 "' WHERE " + COLUMN_NAME_LOGIN + " = '" + login + "' ;";
         db.execSQL(sql);
     }

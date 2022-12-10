@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,8 +32,10 @@ public class MyArrayList extends AppCompatActivity implements View.OnClickListen
     Button Button, exite;
     ListView textList;
     ArrayList<String> myStringArray;
+    Message message = new Message();
     ArrayAdapter<String> TextAdapter;
     DatabaseHandler db = new DatabaseHandler(this);
+    MyHandler handler;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
@@ -37,6 +43,7 @@ public class MyArrayList extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.array_list_activity);
+        handler = new MyHandler(db, this);
 
         Button = findViewById(R.id.button1);
         edittext1 = findViewById(R.id.editTextTextPersonName);
@@ -44,37 +51,26 @@ public class MyArrayList extends AppCompatActivity implements View.OnClickListen
         textList = findViewById(R.id.textList);
         myStringArray = new ArrayList<>();
         TextAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, myStringArray);
-
+        updateTextAdapter();
         exite = findViewById(R.id.button);
         exite.setOnClickListener(this);
 
         String email = getIntent().getStringExtra("login");
         textView1.setText(textView1.getText().toString() + " " + email);
 
-        updateTextAdapter();
 
-        Button.setOnClickListener(v -> {
-            String password = edittext1.getText().toString();
-            db.updateUser(email, password);
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "Новый пароль успешно сохранен", Toast.LENGTH_SHORT);
-            toast.show();
-            edittext1.setText("");
-            updateTextAdapter();
+        Button.post(() -> {
+            Button.setOnClickListener(v -> {
+                message.arg1 = 4;
+                handler.handleMessage(message);
+            });
         });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void updateTextAdapter() {
-        List<User> allUsers = db.getAllUsers();
-        myStringArray.removeIf(i->true);
-        for (User user :
-                allUsers) {
-            myStringArray.add("ID:" + user.getId() + " login: " + user.getLogin()
-                    + " password: " + user.getPassword());
-            textList.setAdapter(TextAdapter);
-            TextAdapter.notifyDataSetChanged();
-        }
+        message.arg1 = 5;
+        handler.handleMessage(message);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
